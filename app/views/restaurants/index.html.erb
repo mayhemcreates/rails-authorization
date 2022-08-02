@@ -1,0 +1,24 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Restaurants</h1>
+
+<div id="restaurants">
+  <% @restaurants.each do |restaurant| %>
+    <%= render restaurant %>
+    <p>
+      <%= link_to "Show this restaurant", restaurant %>
+
+      <% if policy(restaurant).edit? %>
+            <%= link_to "Edit", edit_restaurant_path(restaurant) %>
+      <% end %>
+      <% if policy(restaurant).destroy? %>
+        <%= link_to "Destroy", restaurant, method: :delete, data: { confirm: 'Are you sure?'} %>
+      <% end %>
+
+    </p>
+  <% end %>
+</div>
+
+<%= if policy(Restaurant).new? %> <%# calling on the class, as out of the scope of the instance variable%>
+  <%= link_to "New restaurant", new_restaurant_path %>
+<% end %>
